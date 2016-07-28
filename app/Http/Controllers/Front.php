@@ -19,11 +19,12 @@ class Front extends Controller {
     var $products;
     var $title;
     var $description;
+    var $category;
 
     public function __construct() {
         $this->brands = Brand::all(array('name'));
-        $this->categories = Category::all(array('name'));
-        $this->products = Product::all(array('id','name','price'));
+        $this->categories = Category::all(array('id','name'));
+        $this->products = Product::all(array('id','name','price','category_id'));
     }
 
     public function index() {
@@ -31,7 +32,7 @@ class Front extends Controller {
     }
 
     public function products() {
-        return view('products', array('title' => 'Products Listing','description' => '','page' => 'products', 'brands' => $this->brands, 'categories' => $this->categories, 'products' => $this->products));
+        return view('products', array('title' => 'Products Listing','description' => '','page' => 'products', 'brands' => $this->brands, 'categories' => $this->categories, 'products' => $this->products, 'category' => "All"));
     }
 
     public function product_details($id) {
@@ -39,8 +40,15 @@ class Front extends Controller {
         return view('product_details', array('product' => $product, 'title' => $product->name,'description' => '','page' => 'products', 'brands' => $this->brands, 'categories' => $this->categories, 'products' => $this->products));
     }
 
-    public function product_categories($name) {
-        return view('products', array('title' => 'Welcome','description' => '','page' => 'products', 'brands' => $this->brands, 'categories' => $this->categories, 'products' => $this->products));
+    public function product_categories($id) {
+        $category = Category::find($id);
+        $products_filtered=array();
+        foreach ($this->products as $product){
+            if($product->category_id==$category->id) {
+                array_push($products_filtered, $product);
+            }
+        }
+        return view('products', array('title' => 'Welcome','description' => '','page' => 'products', 'brands' => $this->brands, 'categories' => $this->categories, 'products' => $products_filtered, 'category' => $category->name));
     }
 
     public function product_brands($name, $category = null) {

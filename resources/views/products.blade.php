@@ -1,11 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
-    <section id="advertisement">
-        <div class="container">
-            <img src="{{asset('images/shop/advertisement.jpg')}}" alt="" />
-        </div>
-    </section>
+
 
     <section>
         <div class="container">
@@ -18,13 +14,13 @@
 
                 <div class="col-sm-9 padding-right">
                     <div class="features_items"><!--features_items-->
-                        <h2 class="title text-center">Features Items</h2>
+                        <h2 class="title text-center">{{$category}}</h2>
                         @foreach ($products as $product)
                             <div class="col-sm-4">
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{{asset('images/shop/product9.jpg')}}" alt="" />
+                                            <img src="{{asset('images/shop/product1.jpg')}}" alt="" />
                                             <h2>${{$product->price}}</h2>
                                             <p>{{$product->name}}</p>
                                             <a href="{{url('cart')}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
