@@ -7,7 +7,7 @@ use App\Category;
 use App\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Request;
-use Gloudemans\Shoppingcart\Cart;
+use Cart;
 use Illuminate\Support\Facades\Redirect;
 
 
@@ -76,20 +76,42 @@ class Front extends Controller {
     }
 
     public function cart() {
+        echo "funkcia CART";
+        echo Request::getMethod();
+        $cart = Cart::content();
+        return view('cart', array('cart' => $cart, 'title' => 'Welcome', 'description' => '', 'page' => 'home'));
+    }
 
-        if (Request::isMethod('POST')) {
-            echo "ahoj2";
-            $product_id = Request::get('product_id');
-            $product = Product::find($product_id);
-            Cart::add(array('id' => $product_id, 'name' => $product->name, 'qty' => 1, 'price' => $product->price));
+    public function cart_parse(){
+        echo "PARSE";
+
+        if(Request::isMethod('POST')){
+            $option=Request::get('option');
+            echo $option;
+            switch ($option){
+                case "add": {
+                    $this->cart_add();
+                    break;
+                }
+
+            }
         }else{
             echo "bla";
         }
 
         $cart = Cart::content();
-
         return view('cart', array('cart' => $cart, 'title' => 'Welcome', 'description' => '', 'page' => 'home'));
 
+    }
+
+    public function cart_update(Request $request, $id) {
+        echo "Update";
+    }
+
+    public function cart_add() {
+        $product_id = Request::get('product_id');
+        $product = Product::find($product_id);
+        Cart::add(array('id' => $product_id, 'name' => $product->name, 'qty' => 1, 'price' => $product->price));
     }
 
     public function checkout() {

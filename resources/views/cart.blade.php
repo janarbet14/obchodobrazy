@@ -37,18 +37,45 @@
                                 </td>
                                 <td class="cart_quantity">
                                     <div class="cart_quantity_button">
-                                        <a class="cart_quantity_up" href=""> + </a>
-                                        <input class="cart_quantity_input" type="text" name="quantity" value="{{$item->qty}}" autocomplete="off" size="2">
-                                        <a class="cart_quantity_down" href=""> - </a>
+                                        <script>
+                                            function increase(){
+                                                var textBox = document.getElementById("quantity");
+                                                textBox.value++;
+                                                update();
+                                            }
+                                            function decrease(){
+                                                var textBox = document.getElementById("quantity");
+                                                textBox.value--;
+                                                update();
+
+                                            }
+                                            function update(){
+                                                $.post()
+                                               alert ('a');
+                                            }
+                                        </script>
+
+                                        <a class="cart_quantity_up" href="#" onclick="increase({{$item->id}})"> + </a>
+
+                                        <input class="cart_quantity_input" type="text" id="quantity"name="quantity" value="{{$item->qty}}" autocomplete="off" size="2" onchange="update({{$item}})" >
+                                        <a class="cart_quantity_down" href="#" onclick="decrease()"> - </a>
                                     </div>
+
+                                    <button class="btn btn-warning btn-xs btn-detail open-modal" value="{{$item->id}}">Edit</button>
                                 </td>
                                 <td class="cart_total">
                                     <p class="cart_total_price">${{$item->subtotal}}</p>
                                 </td>
                                 <td class="cart_delete">
-                                    <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+                                   
+                                    <a class="cart_quantity_delete" id="btn-add" name="btn-add" href=""><i class="fa fa-times"></i></a>
                                 </td>
                             </tr>
+
+                            <meta name="_token" content="{!! csrf_token() !!}" />
+                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+                            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+                            <script src="{{asset('js/ajax-crud.js')}}"></script>
                         @endforeach
                         @else
                             <p>You have no items in the shopping cart</p>

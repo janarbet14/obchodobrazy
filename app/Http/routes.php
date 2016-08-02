@@ -20,7 +20,20 @@ Route::get('/blog/post/{id}', 'Front@blog_post');
 Route::get('/contact-us', 'Front@contact_us');
 Route::get('/login', 'Front@login');
 Route::get('/logout', 'Front@logout');
+
 Route::get('/cart', 'Front@cart');
+Route::post('/cart', 'Front@cart_parse');
+Route::put('/cart/{task_id?}',function(Request $request,$task_id){
+    $task = Task::find($task_id);
+
+    $task->task = $request->task;
+    $task->description = $request->description;
+
+    $task->save();
+
+    return Response::json($task);
+});
+
 Route::get('/checkout', 'Front@checkout');
 Route::get('/search/{query}', 'Front@search');
 
