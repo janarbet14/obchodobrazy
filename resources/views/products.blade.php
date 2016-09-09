@@ -1,8 +1,6 @@
 @extends('layouts.layout')
 
 @section('content')
-
-
     <section>
         <div class="container">
             <div class="row">
@@ -20,36 +18,32 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{{asset('images/shop/product1.jpg')}}" alt="" />
-                                            <h2>${{$product->price}}</h2>
+                                            <img src="{{asset("$product->img_src")}}" alt="" />
+                                            <h2>{{$product->price}}€</h2>
                                             <p>{{$product->name}}</p>
-                                            <a href="{{url('cart')}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Pridaj do košíka</a>
-                                            <a href='{{url("products/details/$product->id")}}' class="btn btn-default add-to-cart"><i class="fa fa-info"></i>View Details</a>
+                                            <a href="{{url('cart_process')}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Pridaj do košíka</a>
+                                            <a href='{{url("products/details/$product->id")}}' class="btn btn-default add-to-cart"><i class="fa fa-info"></i>Zobraziť detail</a>
                                         </div>
                                         <div class="product-overlay">
                                             <div class="overlay-content">
-                                                <h2>${{$product->price}}</h2>
+                                                <h2>{{$product->price}}€</h2>
                                                 <p>${{$product->name}}</p>
-                                                <form method="POST" action="{{url('cart')}}">
-                                                    <input type="hidden" name="option" value="add">
+                                                <form id="frmProduct" name="frmProduct" method="POST" action="{{url('cart_process')}}">
                                                     <input type="hidden" name="product_id" value="{{$product->id}}">
+                                                    <input type="hidden" name="product_qty" id="product_qty{{$product->id}}" value="1">
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                    <button type="submit" class="btn btn-default add-to-cart">
+                                                    <button class="btn btn-default add-to-cart" type="submit" name="cart_add" id="cart_add" value="{{$product->id}}">
                                                         <i class="fa fa-shopping-cart"></i>
-                                                        Add to cart
+                                                        Pridaj do košíka
                                                     </button>
                                                 </form>
-                                                <a href='{{url("products/details/$product->id")}}' class="btn btn-default add-to-cart"><i class="fa fa-info"></i>View Details</a>
+                                                <a href='{{url("products/details/$product->id")}}' class="btn btn-default add-to-cart"><i class="fa fa-info"></i>Zobraziť detail</a>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="choose">
-                                        <ul class="nav nav-pills nav-justified">
-                                            <li><a href=""><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-                                            <li><a href=""><i class="fa fa-plus-square"></i>Add to compare</a></li>
-                                        </ul>
-                                    </div>
+
                                 </div>
+
                             </div>
                         @endforeach
                         <ul class="pagination">

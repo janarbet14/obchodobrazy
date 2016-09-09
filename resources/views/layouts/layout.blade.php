@@ -32,8 +32,8 @@
                         <div class="col-sm-6">
                             <div class="contactinfo">
                                 <ul class="nav nav-pills">
-                                    <li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
-                                    <li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
+                                    <li><a href="#"><i class="fa fa-phone"></i> +421 000 000 000</a></li>
+                                    <li><a href="#"><i class="fa fa-envelope"></i> obchodobrazy@gmail.com</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -63,10 +63,8 @@
                         <div class="col-sm-8">
                             <div class="shop-menu pull-right">
                                 <ul class="nav navbar-nav">
-                                    <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
-                                    <li><a href="{{url('checkout')}}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                    <li><a href="{{url('cart')}}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                    <li><a href="{{url('login')}}"><i class="fa fa-lock"></i> Login</a></li>
+                                    <li><a href="{{url('checkout')}}"><i class="fa fa-crosshairs"></i> Objednávka</a></li>
+                                    <li><a href="{{url('cart')}}"><i class="fa fa-shopping-cart"></i> Nákupný košík</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -88,10 +86,9 @@
                             </div>
                             <div class="mainmenu pull-left">
                                 <ul class="nav navbar-nav collapse navbar-collapse">
-                                    <li><a href="{{url('')}}" {{$page == 'home' ? 'class=active' : ''}}>Home</a></li>
-                                    <li><a href="{{url('products')}}" {{$page == 'products' ? 'class=active' : ''}}>Products</a></li>
-                                    <li><a href="{{url('blog')}}" {{$page == 'blog' ? 'class=active' : ''}}>Blog</a></li>
-                                    <li><a href="{{url('contact-us')}}" {{$page == 'contact_us' ? 'class=active' : ''}}>Contact Us</a></li>
+                                    <li><a href="{{url('')}}" {{$page == 'home' ? 'class=active' : ''}}>Domov</a></li>
+                                    <li><a href="{{url('products')}}" {{$page == 'products' ? 'class=active' : ''}}>Produkty</a></li>
+                                    <li><a href="{{url('contact-us')}}" {{$page == 'contact_us' ? 'class=active' : ''}}>Kontaktujte nás</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -108,86 +105,6 @@
         @yield('content')
 
         <footer id="footer"><!--Footer-->
-            <div class="footer-top">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <div class="companyinfo">
-                                <h2><span>e</span>-shopper</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
-                            </div>
-                        </div>
-                        <div class="col-sm-7">
-                            <div class="col-sm-3">
-                                <div class="video-gallery text-center">
-                                    <a href="#">
-                                        <div class="iframe-img">
-                                            <img src="{{asset('images/home/iframe1.png')}}" alt="" />
-                                        </div>
-                                        <div class="overlay-icon">
-                                            <i class="fa fa-play-circle-o"></i>
-                                        </div>
-                                    </a>
-                                    <p>Circle of Hands</p>
-                                    <h2>24 DEC 2014</h2>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-3">
-                                <div class="video-gallery text-center">
-                                    <a href="#">
-                                        <div class="iframe-img">
-                                            <img src="{{asset('images/home/iframe2.png')}}" alt="" />
-                                        </div>
-                                        <div class="overlay-icon">
-                                            <i class="fa fa-play-circle-o"></i>
-                                        </div>
-                                    </a>
-                                    <p>Circle of Hands</p>
-                                    <h2>24 DEC 2014</h2>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-3">
-                                <div class="video-gallery text-center">
-                                    <a href="#">
-                                        <div class="iframe-img">
-                                            <img src="{{asset('images/home/iframe3.png')}}" alt="" />
-                                        </div>
-                                        <div class="overlay-icon">
-                                            <i class="fa fa-play-circle-o"></i>
-                                        </div>
-                                    </a>
-                                    <p>Circle of Hands</p>
-                                    <h2>24 DEC 2014</h2>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-3">
-                                <div class="video-gallery text-center">
-                                    <a href="#">
-                                        <div class="iframe-img">
-                                            <img src="{{asset('images/home/iframe4.png')}}" alt="" />
-                                        </div>
-                                        <div class="overlay-icon">
-                                            <i class="fa fa-play-circle-o"></i>
-                                        </div>
-                                    </a>
-                                    <p>Circle of Hands</p>
-                                    <h2>24 DEC 2014</h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="address">
-                                <img src="{{asset('images/home/map.png')}}" alt="" />
-                                <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="footer-widget">
                 <div class="container">
                     <div class="row">

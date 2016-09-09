@@ -1,5 +1,4 @@
 <?php
-
 /*
   |--------------------------------------------------------------------------
   | Application Routes
@@ -10,6 +9,7 @@
   | and give it the controller to call when that URI is requested.
   |
  */
+
 Route::get('/', 'Front@index');
 Route::get('/products', 'Front@products');
 Route::get('/products/details/{id}', 'Front@product_details');
@@ -20,78 +20,41 @@ Route::get('/blog/post/{id}', 'Front@blog_post');
 Route::get('/contact-us', 'Front@contact_us');
 Route::get('/login', 'Front@login');
 Route::get('/logout', 'Front@logout');
-
-Route::get('/cart', 'Front@cart');
+//Route::get('/cart', 'Front@cart');
 Route::post('/cart', 'Front@cart_parse');
-Route::put('/cart/{task_id?}',function(Request $request,$task_id){
-    $task = Task::find($task_id);
-
-    $task->task = $request->task;
-    $task->description = $request->description;
-
-    $task->save();
-
-    return Response::json($task);
-});
-
 Route::get('/checkout', 'Front@checkout');
+
+Route::post('/checkout', 'Front@checkout');
 Route::get('/search/{query}', 'Front@search');
 
-Route::get('/insert', function() {
-    App\Category::create(array('name' => 'Music'));
 
-    return 'category added';
-});
+Route::get('/cart', 'Front@cart_all');
 
-Route::get('/read', function() {
-    $category = new App\Category();
-    
-    $data = $category->all(array('name','id'));
+Route::post('/cart_process','Front@cart_add');
 
-    foreach ($data as $list) {
-        echo $list->id . ' ' . $list->name . '<br>';
-    }
-});
+Route::get('cart_process/cart_clear', 'Front@cart_clear' );
+Route::delete('cart_process/cart_clear', [
+    'as' => 'cart_clear',
+    'uses' => 'Front@cart_clear'
+]);
 
-Route::get('/update', function() {
-    $category = App\Category::find(16);
-    $category->name = 'HEAVY METAL';
-    $category->save();
-    
-    $data = $category->all(array('name','id'));
+Route::get('cart_process/remove/{rowId?}', 'Front@cart_remove' );
+Route::delete('cart_process/remove/{rowId?}', [
+    'as' => 'cart_remove',
+    'uses' => 'Front@cart_remove'
+]);
 
-    foreach ($data as $list) {
-        echo $list->id . ' ' . $list->name . '<br>';
-    }
-});
-
-Route::get('/delete', function() {
-    $category = App\Category::find(5);
-    $category->delete();
-    
-    $data = $category->all(array('name','id'));
-
-    foreach ($data as $list) {
-        echo $list->id . ' ' . $list->name . '<br>';
-    }
-});
+Route::post('/control', [
+    'as' => 'control',
+    'uses' => 'Front@control'
+]);
+Route::post('/send', 'OrderDataController@sendEmail');
+//Route::get('/order','Front@order');
+//Route::post('/order','Front@order');
 
 
 
-Route::get('/raw', function () {
-    $sql = "INSERT INTO categories (name) VALUES ('POMBE')";
 
-    DB::statement($sql);
-    $results = DB::select(DB::raw("SELECT * FROM categories"));
-
-    print_r($results);
-}
-);
-
-Route::get('blade', function () {
-    $drinks = array('Vodka', 'Gin', 'Brandy');
-    return view('page', array('name' => 'The Raven', 'day' => 'Friday', 'drinks' => $drinks));
-});
 
 
 

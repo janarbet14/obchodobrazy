@@ -6,7 +6,7 @@
             <div class="breadcrumbs">
                 <ol class="breadcrumb">
                     <li><a href="#">Home</a></li>
-                    <li class="active">Shopping Cart</li>
+                    <li class="active">Nákupný košík</li>
                 </ol>
             </div>
             <div class="table-responsive cart_info">
@@ -14,11 +14,13 @@
                     <table class="table table-condensed">
                         <thead>
                         <tr class="cart_menu">
-                            <td class="image">Item</td>
+                            <td class="image">Položka</td>
                             <td class="description"></td>
-                            <td class="price">Price</td>
-                            <td class="quantity">Quantity</td>
-                            <td class="total">Total</td>
+                            <td class="description">Prevedenie</td>
+                            <td class="description">Rozmery</td>
+                            <td class="price">Cena</td>
+                            <td class="quantity">Množstvo</td>
+                            <td class="total">Spolu</td>
                             <td></td>
                         </tr>
                         </thead>
@@ -33,52 +35,33 @@
                                     <p>Web ID: {{$item->id}}</p>
                                 </td>
                                 <td class="cart_price">
-                                    <p>${{$item->price}}</p>
+                                    <p>{{$item->options["product_design"]}}</p>
+                                </td>
+                                <td class="cart_price">
+                                    <p>{{$item->options["product_sizeX"]}}:{{$item->options["product_sizeY"]}}</p>
+                                </td>
+                                <td class="cart_price">
+                                    <p>{{$item->price}}€</p>
                                 </td>
                                 <td class="cart_quantity">
                                     <div class="cart_quantity_button">
-                                        <script>
-                                            function increase(){
-                                                var textBox = document.getElementById("quantity");
-                                                textBox.value++;
-                                                update();
-                                            }
-                                            function decrease(){
-                                                var textBox = document.getElementById("quantity");
-                                                textBox.value--;
-                                                update();
-
-                                            }
-                                            function update(){
-                                                $.post()
-                                               alert ('a');
-                                            }
-                                        </script>
-
-                                        <a class="cart_quantity_up" href="#" onclick="increase({{$item->id}})"> + </a>
-
-                                        <input class="cart_quantity_input" type="text" id="quantity"name="quantity" value="{{$item->qty}}" autocomplete="off" size="2" onchange="update({{$item}})" >
-                                        <a class="cart_quantity_down" href="#" onclick="decrease()"> - </a>
+                                        <meta name="token2" content="{{csrf_token()}}" />
+                                        <a class="cart_quantity_up" href="" onclick="increase({{$item->product_id}})" > + </a>
+                                        <input class="cart_quantity_input" type="text" id="quantity" name="quantity" value="{{$item->qty}}" autocomplete="off" size="2" onchange="update({{$item}})" >
+                                        <a class="cart_quantity_down" href="" onclick="decrease({{$item->product_id}})" value="{{$item->product_id}}"> - </a>
                                     </div>
 
-                                    <button class="btn btn-warning btn-xs btn-detail open-modal" value="{{$item->id}}">Edit</button>
                                 </td>
                                 <td class="cart_total">
-                                    <p class="cart_total_price">${{$item->subtotal}}</p>
+                                    <p class="cart_total_price">{{$item->subtotal}}€</p>
                                 </td>
                                 <td class="cart_delete">
-                                   
-                                    <a class="cart_quantity_delete" id="btn-add" name="btn-add" href=""><i class="fa fa-times"></i></a>
+                                    <a class="cart_quantity_delete" name="cart_delete" href="{!! route('cart_remove') !!}\{{$item->rowid}}"><i class="fa fa-times"></i></a>
                                 </td>
                             </tr>
-
-                            <meta name="_token" content="{!! csrf_token() !!}" />
-                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-                            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-                            <script src="{{asset('js/ajax-crud.js')}}"></script>
                         @endforeach
                         @else
-                            <p>You have no items in the shopping cart</p>
+                            <p>V košíku sa nenachádzajú žiadne produkty</p>
                         @endif
                         </tbody>
                     </table>
@@ -88,78 +71,23 @@
 
     <section id="do_action">
         <div class="container">
-            <div class="heading">
-                <h3>What would you like to do next?</h3>
-                <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
-            </div>
             <div class="row">
-                <div class="col-sm-6">
-                    <div class="chose_area">
-                        <ul class="user_option">
-                            <li>
-                                <input type="checkbox">
-                                <label>Use Coupon Code</label>
-                            </li>
-                            <li>
-                                <input type="checkbox">
-                                <label>Use Gift Voucher</label>
-                            </li>
-                            <li>
-                                <input type="checkbox">
-                                <label>Estimate Shipping & Taxes</label>
-                            </li>
-                        </ul>
-                        <ul class="user_info">
-                            <li class="single_field">
-                                <label>Country:</label>
-                                <select>
-                                    <option>United States</option>
-                                    <option>Bangladesh</option>
-                                    <option>UK</option>
-                                    <option>India</option>
-                                    <option>Pakistan</option>
-                                    <option>Ucrane</option>
-                                    <option>Canada</option>
-                                    <option>Dubai</option>
-                                </select>
-
-                            </li>
-                            <li class="single_field">
-                                <label>Region / State:</label>
-                                <select>
-                                    <option>Select</option>
-                                    <option>Dhaka</option>
-                                    <option>London</option>
-                                    <option>Dillih</option>
-                                    <option>Lahore</option>
-                                    <option>Alaska</option>
-                                    <option>Canada</option>
-                                    <option>Dubai</option>
-                                </select>
-
-                            </li>
-                            <li class="single_field zip-field">
-                                <label>Zip Code:</label>
-                                <input type="text">
-                            </li>
-                        </ul>
-                        <a class="btn btn-default update" href="">Get Quotes</a>
-                        <a class="btn btn-default check_out" href="">Continue</a>
-                    </div>
-                </div>
                 <div class="col-sm-6">
                     <div class="total_area">
                         <ul>
-                            <li>Cart Sub Total <span>$59</span></li>
-                            <li>Eco Tax <span>$2</span></li>
-                            <li>Shipping Cost <span>Free</span></li>
-                            <li>Total <span>${{Cart::total()}}</span></li>
+                            <li>Tovar spolu <span>{{Cart::total()}}€</span></li>
+                            <li>Poštovné <span>2€</span></li>
+                            <li>Spolu <span>{{Cart::total()+2}}€</span></li>
                         </ul>
-                        <a class="btn btn-default update" href="{{url('clear-cart')}}">Clear Cart</a>
-                        <a class="btn btn-default check_out" href="{{url('checkout')}}">Check Out</a>
+                        <a class="btn btn-default update" href="{!! route('cart_clear') !!}">Vyprázdniť košík</a>
+                        <a class="btn btn-default check_out" href="{{url('checkout')}}">Pokračovať</a>
                     </div>
                 </div>
             </div>
         </div>
+        <meta name="_token" content="{!! csrf_token() !!}" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
     </section><!--/#do_action-->
 @endsection
