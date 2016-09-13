@@ -142,6 +142,7 @@ class OrderDataController extends Controller{
     }
 
     public function sendEmail(Request $request){
+        $fakt_udaje='ahoj';
         Mail::send('email', ['fakt_udaje' => $fakt_udaje, 'cart' => $this->cart], function ($message)
         {
 

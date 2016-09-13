@@ -38,7 +38,7 @@
                                     <p>{{$item->options["product_design"]}}</p>
                                 </td>
                                 <td class="cart_price">
-                                    <p>{{$item->options["product_sizeX"]}}:{{$item->options["product_sizeY"]}}</p>
+                                    <p>{{$item->options["product_sizeX"]}}x{{$item->options["product_sizeY"]}}</p>
                                 </td>
                                 <td class="cart_price">
                                     <p>{{$item->price}}€</p>
